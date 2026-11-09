@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: "optional:configserver:"
+  datasource:
+    url: jdbc:postgresql://localhost:5433/order
+    username: order-service
+    password: order
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    bootstrap: default
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  flyway:
+    enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/microservices
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+     defaultZone: http://localhost:8761/eureka/
+
+

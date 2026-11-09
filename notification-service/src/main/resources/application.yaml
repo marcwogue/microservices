@@ -1,0 +1,39 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    username: kakudja0@gmail.com
+    password: xqjvrgtzjzqqlzyx
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+    port: 582
+
+
+  application:
+    name: notification-service
+  config:
+    import: "optional:configserver:"
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      group-id: notification-service
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.formation.notificationservice.event.CreateOrderEvent
+server:
+  port: 8082
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+
+
+
