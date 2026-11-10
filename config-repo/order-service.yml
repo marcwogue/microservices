@@ -1,6 +1,6 @@
 spring:
   kafka:
-   bootstrap-servers: kafk:9094
+   bootstrap-servers: localhost:9092
   security:
     oauth2:
       resourceserver:
